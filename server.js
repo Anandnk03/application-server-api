@@ -4,9 +4,9 @@ const app = express();
 const logger = require('morgan');
 const cors = require('cors');
 const connectDB = require('./config/db');
-//const routes = require('./routes');
+const routes = require('./routes');
 const ENV = require('./data/env');
-const path = require('path');
+//const path = require('path');
 
 // CORS
 app.use(cors());
@@ -30,8 +30,9 @@ app.get('/ping', (req, res) =>
 );
 
 //ROUTES
-//routes.map((route) => app.use(route.path, require(`./routes/${route.file}`)));
+routes.map((route) => app.use(route.path, require(`./routes/${route.file}`)));
 
+//app.use(route.path, require(`./routes/${route.file}`)
 //PORT CONNECTIONS
 app.listen(ENV.PORT, () => {
   console.log(`Server Started on ${ENV.PORT}`);
