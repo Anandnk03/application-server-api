@@ -50,6 +50,7 @@ module.exports = async (req, res, next) => {
               roleName: role.name == undefined ? null : role.name,
               roleId: role.id == undefined ? null : role.id,
             };
+
             const jwtToken = jwt.sign(payload, ENV.JWT_SECRET, {
               expiresIn: ENV.JWT_EXPIRATION,
             });

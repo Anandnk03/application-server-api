@@ -2,7 +2,7 @@ const { User, Sequelize } = require('../models');
 const bcrypt = require('bcryptjs');
 
 const create = async (req, res) => {
-  const { name, username, password, role } = req.body;
+  const { name, username, email, password, role } = req.body;
 
   try {
     // check if user already exited
@@ -20,6 +20,7 @@ const create = async (req, res) => {
     const userCreate = await User.create({
       name,
       username,
+      email,
       password: bcrypt.hashSync(password, salt),
       role,
       isAdmin: role == 1 ? true : false,

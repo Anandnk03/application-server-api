@@ -1,5 +1,5 @@
 {
-  "name": "industry-dashboard",
+  "name": "login-server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,7 +9,7 @@
     "dev-setup": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "prod-setup": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed --seed 20221003124532-admin-user && npx sequelize-cli db:seed --seed 20221005065125-role"
   },
-  "author": "MKINFOPOINT IT SOLUTIONS",
+  "author": "Embridge SOLUTIONS",
   "license": "ISC",
   "dependencies": {
     "async": "^3.2.4",
