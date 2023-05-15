@@ -16,6 +16,13 @@ const sequelize = new Sequelize(ENV.DB_NAME, ENV.DB_USER, ENV.DB_PASSWORD, {
   timezone: ENV.TIMEZONE,
   // logging: ENV.APP === 'dev' ? console.log : false,
   logging: false,
+  dialectOptions: {
+    // Observe the need for this nested `options` field for MSSQL
+    options: {
+      encrypt: false,
+      enableArithAbort: false,
+    },
+  },
 });
 
 fs.readdirSync(__dirname)
