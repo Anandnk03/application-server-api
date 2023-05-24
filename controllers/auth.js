@@ -1,16 +1,13 @@
-const models = require('../models');
-const User = models.User;
-const Role = models.Role;
+const { User, db } = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ENV = require('../data/env');
 
 const login = async (req, res) => {
   const { username, password } = req.body;
-
   try {
     // check if user alter exited in username
-    const user = await User.findOne({
+    const user = await db.User.findOne({
       where: {
         username,
         isDeleted: false,

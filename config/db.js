@@ -1,4 +1,4 @@
-const db = require('../models');
+const { db } = require('../models');
 const ENV = require('../data/env');
 
 const connectDB = async () => {

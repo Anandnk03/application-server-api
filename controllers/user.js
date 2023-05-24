@@ -1,12 +1,12 @@
-const { User, Sequelize } = require('../models');
+const { User, db } = require('../models');
 const bcrypt = require('bcryptjs');
 
 const create = async (req, res) => {
   const { name, username, email, password, role } = req.body;
-
+  console.log(req.body);
   try {
     // check if user already exited
-    const userCheck = await User.findOne({
+    const userCheck = await db.User.findOne({
       where: {
         username,
         isDeleted: false,
@@ -17,7 +17,7 @@ const create = async (req, res) => {
       return res.status(404).json({ msg: 'Username already exists' });
 
     const salt = bcrypt.genSaltSync(10);
-    const userCreate = await User.create({
+    const userCreate = await db.User.create({
       name,
       username,
       email,
@@ -27,7 +27,7 @@ const create = async (req, res) => {
     });
 
     // get user by id
-    const user = await User.findOne({
+    const user = await db.User.findOne({
       where: {
         id: userCreate.id,
       },
@@ -42,7 +42,7 @@ const create = async (req, res) => {
     //   },
     // });
     // user.role = roleData;
-    res.status(200).json({ msg: 'User Created', Data: user });
+    res.status(200).json({ msg: 'User Created...?', Data: user });
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: 'Server Error' });
