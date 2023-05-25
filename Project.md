@@ -2,6 +2,18 @@ Login Page
 
 - same sequelize formatter code line like Controller or Models,Migration and Routes
 
+Communication Controller
+
+- using filter drop down query like department or Module basic query
+  if your project all get department and module using api
+
+  using sql Scripts for Communication Controller
+
+  - Get_Department
+  - Get_Modules
+  - PRC_GET_ALL_MACHINE
+  - PRC_GET_PRODUCTBY_MACHINE
+
 Planing Controller.
 
 - using the row query formatter
