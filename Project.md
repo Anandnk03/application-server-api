@@ -29,3 +29,11 @@ Planing Module Sql Scripts Name
 - PRC_GET_PLANDETAILS_RE
 - PRC_UPDATE_PLANDETAILS
 - PRC_UPDATE_DAILYSHIFTPLAN_STATUS
+
+Gap Reason Controller
+
+- using this controller hourly shift gap reason entry like hour by hour actual and plan diff entry the gap quantity add the gap reason
+
+Gap reason Using Sql Scripts
+
+- PRC_GET_GAPLIST
