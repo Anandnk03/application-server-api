@@ -14,19 +14,22 @@ const login = async (req, res) => {
       },
     });
 
-    if (!user) return res.status(400).json({ msg: 'Invalid Credentials' });
+    if (!user) return res.status(303).json({ msg: 'Invalid Credentials' });
 
     //check if password correct
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: 'Invalid Credentials' });
+
+    if (!isMatch) return res.status(303).json({ msg: 'Password Invalid..!' });
 
     // create jwt token
     const payload = {
       id: user.id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
+      role: 'anand',
     };
+
+    console.log('payload', payload);
 
     // generate jwt token
     const token = await jwt.sign(payload, ENV.JWT_SECRET, {
@@ -38,7 +41,7 @@ const login = async (req, res) => {
     });
 
     res.status(200).json({
-      msg: 'Login successful',
+      msg: 'Login successfully',
       token,
       refreshToken,
     });

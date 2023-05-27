@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 
 const create = async (req, res) => {
   const { name, username, email, password, role } = req.body;
-  console.log(req.body);
   try {
     // check if user already exited
     const userCheck = await db.User.findOne({
@@ -14,7 +13,7 @@ const create = async (req, res) => {
     });
 
     if (userCheck)
-      return res.status(404).json({ msg: 'Username already exists' });
+      return res.status(403).json({ msg: 'Username already exists' });
 
     const salt = bcrypt.genSaltSync(10);
     const userCreate = await db.User.create({
@@ -42,7 +41,7 @@ const create = async (req, res) => {
     //   },
     // });
     // user.role = roleData;
-    res.status(200).json({ msg: 'User Created...?', Data: user });
+    res.status(200).json({ msg: 'User Created Successfully...!', Data: user });
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: 'Server Error' });

@@ -14,7 +14,6 @@ const department = async (req, res) => {
 
 const modules = async (req, res) => {
   const { id } = req.params;
-  console.log(req.params);
   try {
     const module = await db.sequelize.query(`Get_Modules ${id}`);
     res.status(200).json({ msg: 'Module Found!', data: module });
@@ -47,9 +46,35 @@ const product = async (req, res) => {
     res.status(500).json({ msg: 'Server Error' });
   }
 };
+
+const Type4M = async (req, res) => {
+  try {
+    const type = await db.sequelize.query('Get_4MTypes');
+    res.status(200).json({ msg: '4MType Found..!', data: type });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: 'Server Error' });
+  }
+};
+
+const gapReasonMaster = async (req, res) => {
+  const { Mid, id } = req.params;
+  try {
+    const master = await db.sequelize.query(
+      `PRC_GET_GAPREASONSLIST ${Mid},${id}`
+    );
+    res.status(200).json({ msg: 'Reason Master Found..!', data: master });
+  } catch (error) {
+    console.log(error);
+    res.status(200).json({ msg: 'Server Error' });
+  }
+};
+
 module.exports = {
   department,
   modules,
   machine,
   product,
+  Type4M,
+  gapReasonMaster,
 };

@@ -16,5 +16,7 @@ router.get('/department', Controller.department);
 router.get('/module/:id', Controller.modules);
 router.get('/machine/:id', Controller.machine);
 router.get('/product/:id', Controller.product);
+router.get('/4mType', Controller.Type4M);
+router.get('/reasonMaster/:Mid/:id', Controller.gapReasonMaster);
 
 module.exports = router;

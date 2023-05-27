@@ -1,4 +1,4 @@
-const { db } = require('../models/index');
+const { poolPromise, db } = require('../models/index');
 const moment = require('moment');
 
 const gapReason = async (req, res) => {
@@ -21,6 +21,29 @@ const gapReason = async (req, res) => {
   }
 };
 
+const createReason = async (req, res) => {
+  const value = req.body;
+  console.log(value);
+  try {
+    for (let i = 0; i < value.length; i++) {
+      const pool = await poolPromise;
+      await pool
+        .request()
+        .input('pIn_HourlyShiftID', sql.Int, value[i].hourlyId)
+        .input('pIn_GapReasonID', sql.Int, value[i].gapreason)
+        .input('pIn_MID', sql.Int, value[i].mid)
+        .input('pIn_LossTime', sql.VarChar(255), value[i].lossTime)
+        .input('pIn_CreatedBy', sql.VarChar(255), value[i].createBy)
+        .execute(`PRC_INSERT_HOURLYSHIFT_GAPREASON`);
+    }
+    return res.status(200).json({ msg: 'Reason Update Successfully' });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('SERVER ERROR');
+  }
+};
+
 module.exports = {
   gapReason,
+  createReason,
 };
