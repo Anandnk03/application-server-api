@@ -1,5 +1,6 @@
 const { poolPromise, db } = require('../models/index');
 const moment = require('moment');
+const sql = require('mssql');
 
 const gapReason = async (req, res) => {
   const { id } = req.params;
@@ -30,10 +31,10 @@ const createReason = async (req, res) => {
       await pool
         .request()
         .input('pIn_HourlyShiftID', sql.Int, value[i].hourlyId)
-        .input('pIn_GapReasonID', sql.Int, value[i].gapreason)
-        .input('pIn_MID', sql.Int, value[i].mid)
+        .input('pIn_GapReasonID', sql.Int, value[i].reasonId)
+        .input('pIn_MID', sql.Int, value[i].Mid)
         .input('pIn_LossTime', sql.VarChar(255), value[i].lossTime)
-        .input('pIn_CreatedBy', sql.VarChar(255), value[i].createBy)
+        .input('pIn_CreatedBy', sql.VarChar(255), value[i].CreateBy)
         .execute(`PRC_INSERT_HOURLYSHIFT_GAPREASON`);
     }
     return res.status(200).json({ msg: 'Reason Update Successfully' });

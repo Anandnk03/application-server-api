@@ -12,7 +12,7 @@ const Controller = require(`../controllers/${controllerName}`);
 
 // routes
 router.get('/:id', Controller.gapReason);
-// router.put('/', Controller.update);
+router.post('/update', Controller.createReason);
 // router.delete('/delete/:id', Controller.archive);
 
 module.exports = router;

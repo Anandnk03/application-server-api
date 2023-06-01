@@ -26,10 +26,8 @@ const login = async (req, res) => {
       id: user.id,
       name: user.name,
       email: user.email,
-      role: 'anand',
+      role: user.role,
     };
-
-    console.log('payload', payload);
 
     // generate jwt token
     const token = await jwt.sign(payload, ENV.JWT_SECRET, {

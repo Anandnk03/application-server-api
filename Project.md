@@ -14,6 +14,11 @@ Communication Controller
   - PRC_GET_ALL_MACHINE
   - PRC_GET_PRODUCTBY_MACHINE
 
+  Than we are using new scripts like gap reason controller
+
+  - Get_4MTypes
+  - PRC_GET_GAPREASONSLIST
+
 Planing Controller.
 
 - using the row query formatter
