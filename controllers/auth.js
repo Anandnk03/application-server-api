@@ -1,34 +1,37 @@
-const models = require('../models');
-const User = models.User;
-const Role = models.Role;
+const { User, db } = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ENV = require('../data/env');
 
 const login = async (req, res) => {
   const { username, password } = req.body;
-
   try {
     // check if user alter exited in username
-    const user = await User.findOne({
+    const user = await db.User.findOne({
       where: {
         username,
         isDeleted: false,
       },
     });
-
-    if (!user) return res.status(400).json({ msg: 'Invalid Credentials' });
+    const role = await db.Role.findOne({
+      where: {
+        isDeleted: false,
+      },
+    });
+    if (!role) return res.status(303).json({ msg: 'role Invalid' });
+    if (!user) return res.status(303).json({ msg: 'Invalid Credentials' });
 
     //check if password correct
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: 'Invalid Credentials' });
 
+    if (!isMatch) return res.status(303).json({ msg: 'Password Invalid..!' });
     // create jwt token
     const payload = {
       id: user.id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
+      role: user.role,
+      access: role.access == undefined ? null : role.access,
     };
 
     // generate jwt token
@@ -41,7 +44,7 @@ const login = async (req, res) => {
     });
 
     res.status(200).json({
-      msg: 'Login successful',
+      msg: 'Login successfully',
       token,
       refreshToken,
     });

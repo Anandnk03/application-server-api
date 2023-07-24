@@ -12,6 +12,9 @@ const Controller = require(`../controllers/${controllerName}`);
 
 // routes
 router.post('/', Controller.create);
-//router.get('/profile', [auth], Controller.getMyProfile);
+router.get('/', Controller.view);
+router.put('/:id', Controller.update);
+router.delete('/:id', Controller.archive);
+module.exports = router;
 
 module.exports = router;

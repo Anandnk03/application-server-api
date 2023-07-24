@@ -7,6 +7,7 @@ const process = require('process');
 const basename = path.basename(__filename);
 const db = {};
 const ENV = require('../data/env');
+const sql = require('mssql');
 
 const sequelize = new Sequelize(ENV.DB_NAME, ENV.DB_USER, ENV.DB_PASSWORD, {
   host: ENV.DB_HOST,
@@ -23,6 +24,20 @@ const sequelize = new Sequelize(ENV.DB_NAME, ENV.DB_USER, ENV.DB_PASSWORD, {
       enableArithAbort: false,
     },
   },
+});
+
+const config = {
+  user: ENV.DB_USER,
+  password: ENV.DB_PASSWORD,
+  server: ENV.DB_HOST,
+  database: ENV.DB_NAME,
+  options: {
+    encrypt: false,
+    enableArithAbort: true,
+  },
+};
+const poolPromise = new sql.ConnectionPool(config).connect().then((pool) => {
+  return pool;
 });
 
 fs.readdirSync(__dirname)
@@ -48,4 +63,4 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+module.exports = { poolPromise, db };

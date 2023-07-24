@@ -11,9 +11,13 @@ const controllerName = filename.split('.')[0];
 const Controller = require(`../controllers/${controllerName}`);
 
 // routes
-router.post('/', Controller.createPlan);
-router.get('/:id', Controller.viewPlan);
-router.put('/', Controller.update);
-router.delete('/delete/:id', Controller.archive);
+
+router.get('/department', Controller.department);
+router.get('/module/:id', Controller.modules);
+router.get('/machine/:id', Controller.machine);
+router.get('/product/:id', Controller.product);
+router.get('/4mType', Controller.Type4M);
+router.get('/reasonMaster/:Mid/:id', Controller.gapReasonMaster);
+router.get('/machineData', Controller.machineData);
 
 module.exports = router;

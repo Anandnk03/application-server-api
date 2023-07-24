@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
-const models = require('../models');
-const User = models.User;
-const Role = models.Role;
+const { db } = require('../models');
 const ENV = require('../data/env');
 
 module.exports = async (req, res, next) => {
@@ -29,7 +27,7 @@ module.exports = async (req, res, next) => {
                 .status(401)
                 .json({ error: true, message: 'Unauthorized Access' });
             }
-            const user = await User.findOne({
+            const user = await db.User.findOne({
               where: { id: decoded.id, isDeleted: false },
             });
             if (!user) {
@@ -38,11 +36,12 @@ module.exports = async (req, res, next) => {
                 .json({ error: true, message: 'Unauthorized Access' });
             }
             // get role by id
-            const role = await Role.findOne({
+            const role = await db.Role.findOne({
               where: {
                 id: user.role,
               },
             });
+            console.log('role', role);
             const payload = {
               id: user.id,
               name: user.name,
@@ -50,6 +49,7 @@ module.exports = async (req, res, next) => {
               roleName: role.name == undefined ? null : role.name,
               roleId: role.id == undefined ? null : role.id,
             };
+            console.log(payload);
 
             const jwtToken = jwt.sign(payload, ENV.JWT_SECRET, {
               expiresIn: ENV.JWT_EXPIRATION,
@@ -70,7 +70,7 @@ module.exports = async (req, res, next) => {
         );
       }
     } else {
-      const user = await User.findOne({
+      const user = await db.User.findOne({
         where: { id: decoded.id, isDeleted: false },
       });
       if (!user) {
