@@ -18,5 +18,6 @@ router.get('/machine/:id', Controller.machine);
 router.get('/product/:id', Controller.product);
 router.get('/4mType', Controller.Type4M);
 router.get('/reasonMaster/:Mid/:id', Controller.gapReasonMaster);
+router.get('/machineData', Controller.machineData);
 
 module.exports = router;

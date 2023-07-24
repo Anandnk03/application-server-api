@@ -11,8 +11,11 @@ const controllerName = filename.split('.')[0];
 const Controller = require(`../controllers/${controllerName}`);
 
 // routes
-router.get('/:id', Controller.gapReason);
-router.post('/update', Controller.createReason);
-router.post('/newReason', Controller.createMaster);
+router.get('/:id', Controller.rejectionView);
+router.put('/update', Controller.addNcQty);
+router.get('/reason/category', Controller.NCReasonCategories);
+router.post('/newReason/', Controller.createNewReason);
+router.get('/reason/:reasonType/:machineId', Controller.viewReason);
+router.put('/reason/update', Controller.updateReason);
 
 module.exports = router;

@@ -42,3 +42,18 @@ Gap Reason Controller
 Gap reason Using Sql Scripts
 
 - PRC_GET_GAPLIST
+- PRC_INSERT_HOURLYSHIFT_GAPREASON
+-
+
+Rejection Controller
+
+using the rejection screen get method and put or post method available ...
+using raw query formatting...
+using script ...
+
+- PRC_GET_NC_LIST
+- PRC_ADD_NC_QTY
+- sql query using Select \* From E2M_NCReasons_Category_M
+- PRC_Insert_NCReason
+- PRC_Get_NCReasons_List
+- PRC_Update_NCQty_Reason

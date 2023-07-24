@@ -4,15 +4,16 @@ const router = express.Router();
 // middleware
 const auth = require('../middleware/auth');
 
-// Controller import
+// controller import
 const path = require('path');
 const filename = path.basename(__filename);
 const controllerName = filename.split('.')[0];
 const Controller = require(`../controllers/${controllerName}`);
 
 // routes
-router.get('/:id', Controller.gapReason);
-router.post('/update', Controller.createReason);
-router.post('/newReason', Controller.createMaster);
+router.post('/', Controller.create);
+router.get('/', Controller.getAll);
+router.put('/:id', Controller.update);
+router.delete('/:id', Controller.archive);
 
 module.exports = router;

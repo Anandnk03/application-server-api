@@ -70,6 +70,16 @@ const gapReasonMaster = async (req, res) => {
   }
 };
 
+const machineData = async (req, res) => {
+  try {
+    const data = await db.sequelize.query(`Get_Machine`);
+    res.status(200).json({ msg: 'Machine Found..!', data: data[0] });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: 'Server Error' });
+  }
+};
+
 module.exports = {
   department,
   modules,
@@ -77,4 +87,5 @@ module.exports = {
   product,
   Type4M,
   gapReasonMaster,
+  machineData,
 };

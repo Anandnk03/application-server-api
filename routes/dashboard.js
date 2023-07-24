@@ -11,8 +11,8 @@ const controllerName = filename.split('.')[0];
 const Controller = require(`../controllers/${controllerName}`);
 
 // routes
-router.get('/:id', Controller.gapReason);
-router.post('/update', Controller.createReason);
-router.post('/newReason', Controller.createMaster);
+
+router.get('/productionData/:id/:sDate?/:shift?', Controller.Data);
+router.get('/hourlyData/:id/:sDate?/:shift?', Controller.hourlyData);
 
 module.exports = router;

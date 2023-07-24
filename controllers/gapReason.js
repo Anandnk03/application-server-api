@@ -44,7 +44,27 @@ const createReason = async (req, res) => {
   }
 };
 
+const createMaster = async (req, res) => {
+  const { newReason, MachineId, typeID } = req.body;
+  console.log(req.body);
+
+  try {
+    const pool = await poolPromise;
+    await pool
+      .request()
+      .input('pIN_GAPREASON', sql.VarChar(255), newReason)
+      .input('pIN_MACHINEID', sql.Int, MachineId)
+      .input('pIN_4MID', sql.Int, typeID)
+      .execute(`PRC_INSERT_GAPREASON_MASTER`);
+    return res.status(200).json({ msg: 'New Reason Create Successfully..!' });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('SERVER ERROR');
+  }
+};
+
 module.exports = {
   gapReason,
   createReason,
+  createMaster,
 };

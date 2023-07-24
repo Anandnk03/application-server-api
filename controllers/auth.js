@@ -13,20 +13,25 @@ const login = async (req, res) => {
         isDeleted: false,
       },
     });
-
+    const role = await db.Role.findOne({
+      where: {
+        isDeleted: false,
+      },
+    });
+    if (!role) return res.status(303).json({ msg: 'role Invalid' });
     if (!user) return res.status(303).json({ msg: 'Invalid Credentials' });
 
     //check if password correct
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) return res.status(303).json({ msg: 'Password Invalid..!' });
-
     // create jwt token
     const payload = {
       id: user.id,
       name: user.name,
       email: user.email,
       role: user.role,
+      access: role.access == undefined ? null : role.access,
     };
 
     // generate jwt token

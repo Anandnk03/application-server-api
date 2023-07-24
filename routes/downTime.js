@@ -11,8 +11,10 @@ const controllerName = filename.split('.')[0];
 const Controller = require(`../controllers/${controllerName}`);
 
 // routes
-router.get('/:id', Controller.gapReason);
-router.post('/update', Controller.createReason);
-router.post('/newReason', Controller.createMaster);
+
+router.get('/:id', Controller.getDownTime);
+router.get('/reason/master', Controller.getReason);
+router.put('/', Controller.updateReason);
+router.post('/', Controller.createReason);
 
 module.exports = router;
