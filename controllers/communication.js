@@ -26,6 +26,9 @@ const modules = async (req, res) => {
 const machine = async (req, res) => {
   const { id } = req.params;
   try {
+    if (id === undefined) {
+      return res.status(404).json({ msg: 'params is undefined...!' });
+    }
     const machine = await db.sequelize.query(`PRC_GET_ALL_MACHINE ${id}`);
     res.status(200).json({ msg: 'Machine Found..!', data: machine });
   } catch (error) {

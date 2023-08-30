@@ -1,3 +1,4 @@
+const { result } = require('lodash');
 const { db } = require('../models');
 const bcrypt = require('bcryptjs');
 
@@ -169,7 +170,6 @@ const archive = async (req, res) => {
     if (!user) {
       return res.status(404).json({ msg: 'User Not Founded' });
     }
-
     // delete user
     await db.User.update(
       {
@@ -181,7 +181,12 @@ const archive = async (req, res) => {
         },
       }
     );
-    res.status(200).json({ msg: 'User Deleted' });
+    const userData = await db.User.findAll({
+      where: {
+        isDeleted: false,
+      },
+    });
+    res.status(200).json({ msg: 'User Deleted', data: userData });
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: 'Server Error', data: err });
