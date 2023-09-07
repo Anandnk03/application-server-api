@@ -17,7 +17,7 @@ const getDownTime = async (req, res) => {
       });
     });
     res.status(200).json({ msg: 'DownTime Fetch...', data: gapData });
-  } catch (err) {
+    }catch (err){
     res.status(500).json({ msg: 'Server Error' });
     console.error(err);
   }
@@ -70,6 +70,7 @@ const createReason = async (req, res) => {
     res.status(500).json({ msg: 'Server Error' });
   }
 };
+
 
 module.exports = {
   getDownTime,
