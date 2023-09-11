@@ -95,29 +95,7 @@ const machineData = async (req, res) => {
   }
 };
 
-const component = async (req,res) =>{
 
-  try{
-    const data = await db.sequelize.query(`PRC_GET_Component`);
-    res.status(200).json({ msg: 'Componet Found..!', data: data[0]});
-  }catch(error){
-    console.log(error)
-    res.status(500).json({ msg: 'Server Error' });
-  }
-}
-
-
-
-const getOperationId = async(req,res)=>{
-    try{
-      const data = await db.sequelize.query('PRC_GET_OperationId');
-      res.status(200).json({msg:'Operation Name Found',data:data[0]});
-    }
-    catch(error){
-      console.log(error);
-      res.status(500).json({ msg: 'Server Error' });
-    }
-}
 
 const getComponentData = async(req,res)=>{
    try{
@@ -160,8 +138,6 @@ module.exports = {
   Type4M,
   gapReasonMaster,
   machineData,
-  component,
-  getOperationId,
   machineName,
   getComponentData,
   getOperationData,
