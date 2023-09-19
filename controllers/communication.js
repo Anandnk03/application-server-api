@@ -40,7 +40,6 @@ const machine = async (req, res) => {
 const machineName = async(req,res)=>{
 
   try{
-
     const data = await db.sequelize.query(`PRC_Get_MachineName`);
     res.status(200).json({ msg: 'Machine Found !', data: data[0]});
 
@@ -111,6 +110,7 @@ const getComponentData = async(req,res)=>{
 const getOperationData = async(req,res)=>{
   try{
      const data = await db.sequelize.query('PRC_Get_Operation_Data');
+     console.log(data);
      res.status(200).json({msg:'SuccessFully Get the Operation Data',data:data[0]})
   }
   catch(error){
