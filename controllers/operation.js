@@ -4,18 +4,19 @@ const sql = require('mssql');
 
 const addOperation = async(req,res)=>{
 
-    const{componentName,operationNumber,operationName} = req.body;
-
+    const{componentId,operationNumber,operationName} = req.body;
+    console.log('operationData',req.body);
     try {
         const pool = await poolPromise;
         const operationData= await pool
           .request()
-          .input('pIN_ComponentId',sql.Int,componentName)
+          .input('pIN_ComponentId',sql.Int,Number(componentId))
           .input('pIN_OperationName',sql.NVarChar(255),operationName)
           .input('pIN_OperationNumber',sql.NVarChar(50),operationNumber)
           .execute(`PRC_Insert_Operation_Data`);
         
           const data = operationData.recordset
+         
           
         return res
           .status(200)

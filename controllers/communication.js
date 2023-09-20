@@ -110,7 +110,6 @@ const getComponentData = async(req,res)=>{
 const getOperationData = async(req,res)=>{
   try{
      const data = await db.sequelize.query('PRC_Get_Operation_Data');
-     console.log(data);
      res.status(200).json({msg:'SuccessFully Get the Operation Data',data:data[0]})
   }
   catch(error){
