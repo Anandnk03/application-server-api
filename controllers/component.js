@@ -16,7 +16,7 @@ const addComponent= async (req, res) => {
       .input('pIN_CreateBy',sql.VarChar(50),createBy)
       .execute(`PRC_Insert_ComponentData`);
       const Data = componentData.recordset
-     console.log("Data",Data)
+     
     return res
       .status(200)
       .json({ msg: 'Component Add Successfully',data:Data});

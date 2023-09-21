@@ -24,7 +24,7 @@ const gapReason = async (req, res) => {
 
 const createReason = async (req, res) => {
   const value = req.body;
-  console.log(value);
+
   try {
     for (let i = 0; i < value.length; i++) {
       const pool = await poolPromise;
@@ -46,7 +46,7 @@ const createReason = async (req, res) => {
 
 const createMaster = async (req, res) => {
   const { newReason, MachineId, typeID } = req.body;
-  console.log(req.body);
+  
 
   try {
     const pool = await poolPromise;

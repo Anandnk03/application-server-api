@@ -83,7 +83,7 @@ const view = async (req, res) => {
 const update = async (req, res) => {
   const { id } = req.params;
   const { name, userName, password, role, email } = req.body;
-  console.log(req.body);
+  
   try {
     // check if user already exists by username for other user id
     const userCheck = await db.User.findOne({

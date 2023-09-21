@@ -33,7 +33,7 @@ const addmachineOperation = async (req, res) => {
   const updateMachineOperation = async(req,res)=>{
      
     const {Id,ProgramId,QuantityPerCycle,Toct,PerhourOutput,CycleTime} = req.body;
-    console.log(req.body);
+    
     try {
       const pool = await poolPromise;
       const MachineOperationupdateData = await pool

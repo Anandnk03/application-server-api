@@ -35,7 +35,7 @@ const getReason = async (req, res) => {
 
 const updateReason = async (req, res) => {
   const value = req.body;
-  console.log(value);
+  
   try {
     for (let i = 0; i < value.length; i++) {
       const pool = await poolPromise;

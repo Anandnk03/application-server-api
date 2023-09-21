@@ -15,7 +15,7 @@ const createPlan = async (req, res) => {
     Days,
   } = req.body;
 
-  console.log(req.body);
+  
 
   if (password != 1000 && password != 2000 && password != 3000) {
     return res.status(404).json({ msg: 'Password Incorrect!' });

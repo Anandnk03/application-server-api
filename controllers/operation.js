@@ -5,7 +5,7 @@ const sql = require('mssql');
 const addOperation = async(req,res)=>{
 
     const{componentId,operationNumber,operationName} = req.body;
-    console.log('operationData',req.body);
+    
     try {
         const pool = await poolPromise;
         const operationData= await pool
