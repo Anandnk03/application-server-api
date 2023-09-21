@@ -41,7 +41,7 @@ module.exports = async (req, res, next) => {
                 id: user.role,
               },
             });
-            console.log('role', role);
+            
             const payload = {
               id: user.id,
               name: user.name,
@@ -49,7 +49,7 @@ module.exports = async (req, res, next) => {
               roleName: role.name == undefined ? null : role.name,
               roleId: role.id == undefined ? null : role.id,
             };
-            console.log(payload);
+            
 
             const jwtToken = jwt.sign(payload, ENV.JWT_SECRET, {
               expiresIn: ENV.JWT_EXPIRATION,

@@ -2,7 +2,7 @@ const { db } = require('../models');
 const { Op } = require('sequelize');
 const create = async (req, res) => {
   const { name, permissionData } = req.body;
-  console.log(req.body);
+  
   try {
     // check if role already exists by name
     const roleCheck = await db.Role.findOne({
@@ -114,7 +114,7 @@ const update = async (req, res) => {
 
 const archive = async (req, res) => {
   const { id } = req.params;
-  console.log(req.params);
+
   try {
     // get role by id
     const role = await db.Role.findOne({

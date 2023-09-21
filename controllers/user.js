@@ -32,7 +32,7 @@ const create = async (req, res) => {
         id: userCreate.id,
       },
       attributes: {
-        exclude: ['password', 'createdAt', 'updatedAt', 'isDeleted'],
+        exclude: ['password','createdAt','updatedAt','isDeleted'],
       },
     });
     // get role by id
@@ -42,10 +42,10 @@ const create = async (req, res) => {
     //   },
     // });
     // user.role = roleData;
-    res.status(200).json({ msg: 'User Created Successfully...!', Data: user });
+    res.status(200).json({ msg:'User Created Successfully...!', Data: user });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ msg: 'Server Error' });
+    res.status(500).json({ msg:'Server Error'});
   }
 };
 
@@ -56,7 +56,7 @@ const view = async (req, res) => {
         isDeleted: false,
       },
       attributes: {
-        exclude: ['createdAt', 'updatedAt', 'isDeleted'],
+        exclude: ['createdAt','updatedAt','isDeleted'],
       },
     });
     let userData = [];
@@ -83,7 +83,7 @@ const view = async (req, res) => {
 const update = async (req, res) => {
   const { id } = req.params;
   const { name, userName, password, role, email } = req.body;
-  console.log(req.body);
+  
   try {
     // check if user already exists by username for other user id
     const userCheck = await db.User.findOne({

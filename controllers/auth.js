@@ -1,4 +1,4 @@
-const { User, db } = require('../models');
+const { User,db } = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ENV = require('../data/env');
@@ -18,15 +18,15 @@ const login = async (req, res) => {
         isDeleted: false,
       },
     });
-    if (!role) return res.status(303).json({ msg: 'role Invalid' });
-    if (!user) return res.status(303).json({ msg: 'Invalid Credentials' });
+    if (!role) return res.status(303).json({ msg:'role Invalid'});
+    if (!user) return res.status(303).json({ msg:'Invalid Credentials'});
 
     //check if password correct
     const isMatch = await bcrypt.compare(password, user.password);
 
-    if (!isMatch) return res.status(303).json({ msg: 'Password Invalid..!' });
+    if (!isMatch) return res.status(303).json({msg:'Password Invalid..!'});
     // create jwt token
-    const payload = {
+    const payload ={
       id: user.id,
       name: user.name,
       email: user.email,
@@ -35,11 +35,12 @@ const login = async (req, res) => {
     };
 
     // generate jwt token
-    const token = await jwt.sign(payload, ENV.JWT_SECRET, {
-      expiresIn: ENV.JWT_EXPIRATION,
+        const token = await jwt.sign(payload,ENV.JWT_SECRET,{
+        expiresIn:ENV.JWT_EXPIRATION,
     });
+    
     // generate refresh jwt token
-    const refreshToken = await jwt.sign(payload, ENV.REFRESH_TOKEN_SECRET, {
+    const refreshToken = await jwt.sign(payload,ENV.REFRESH_TOKEN_SECRET,{
       expiresIn: ENV.REFRESH_TOKEN_EXPIRATION,
     });
 
@@ -48,7 +49,7 @@ const login = async (req, res) => {
       token,
       refreshToken,
     });
-  } catch (err) {
+  } catch (err){
     console.log(err);
     res.status(500).send('Server Error');
   }

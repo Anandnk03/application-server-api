@@ -11,6 +11,9 @@ const routes = [
   { path: `${prefix}role`, file: 'role' },
   { path: `${prefix}scope`, file: 'scope' },
   { path: `${prefix}downTime`, file: 'downTime' },
+  { path: `${prefix}component`,file: 'component'},
+  { path: `${prefix}operation`,file: 'operation'},
+  { path: `${prefix}machineOperation`,file: 'machineOperation'}
 ];
 
 module.exports = routes;
