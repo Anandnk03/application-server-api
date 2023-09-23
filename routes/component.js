@@ -11,7 +11,8 @@ const controllerName = filename.split('.')[0];
 const Controller = require(`../controllers/${controllerName}`);
 
 // routes
+router.get('/', Controller.getComponentData);
 router.post('/', Controller.addComponent);
-router.put('/',Controller.updateComponent);
+router.put('/', Controller.updateComponent);
 
 module.exports = router;
