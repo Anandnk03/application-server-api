@@ -1,6 +1,4 @@
-const moment = require('moment');
 const { db } = require('../models/index');
-const sql = require('mssql');
 
 const department = async (req, res) => {
   try {
@@ -25,11 +23,12 @@ const modules = async (req, res) => {
 
 const machine = async (req, res) => {
   const { id } = req.params;
+
   try {
-    if (id === undefined) {
-      return res.status(404).json({ msg: 'params is undefined...!' });
+    if (id === 'undefined') {
+      return res.status(404).json({ msg: 'Params is undefined...!' });
     }
-    const machine = await db.sequelize.query(`PRC_GET_ALL_MACHINE ${id}`);
+    const machine = await db.sequelize.query(`PRC_GET_ALL_MACHINE '${id}'`);
     res.status(200).json({ msg: 'Machine Found..!', data: machine });
   } catch (error) {
     console.log(error);
@@ -37,16 +36,14 @@ const machine = async (req, res) => {
   }
 };
 
-const machineName = async(req,res)=>{
-
-  try{
+const machineName = async (req, res) => {
+  try {
     const data = await db.sequelize.query(`PRC_Get_MachineName`);
-    res.status(200).json({ msg: 'Machine Found !', data: data[0]});
-
-  }catch(error){
-    console.log(error)
+    res.status(200).json({ msg: 'Machine Found !', data: data[0] });
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
 const product = async (req, res) => {
   const { id } = req.params;
@@ -94,40 +91,42 @@ const machineData = async (req, res) => {
   }
 };
 
-
-
-const getComponentData = async(req,res)=>{
-   try{
-      const data = await db.sequelize.query('PRC_Get_Component_Data');
-      res.status(200).json({msg:'SuccessFully Get the Component Data',data:data[0]})
-   }
-   catch(error){
+const getComponentData = async (req, res) => {
+  try {
+    const data = await db.sequelize.query('PRC_Get_Component_Data');
+    res
+      .status(200)
+      .json({ msg: 'SuccessFully Get the Component Data', data: data[0] });
+  } catch (error) {
     console.log(error);
     res.status(500).json({ msg: 'Server Error' });
-   }
-}
+  }
+};
 
-const getOperationData = async(req,res)=>{
-  try{
-     const data = await db.sequelize.query('PRC_Get_Operation_Data');
-     res.status(200).json({msg:'SuccessFully Get the Operation Data',data:data[0]})
+const getOperationData = async (req, res) => {
+  try {
+    const data = await db.sequelize.query('PRC_Get_Operation_Data');
+    res
+      .status(200)
+      .json({ msg: 'SuccessFully Get the Operation Data', data: data[0] });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: 'Server Error' });
   }
-  catch(error){
-   console.log(error);
-   res.status(500).json({ msg: 'Server Error' });
-  }
-}
+};
 
-const getMachineOperationData = async(req,res)=>{
-  try{
-     const data = await db.sequelize.query('PRC_Get_MachineOperation_Data');
-     res.status(200).json({msg:'SuccessFully Get the MachineOperation Data',data:data[0]})
+const getMachineOperationData = async (req, res) => {
+  try {
+    const data = await db.sequelize.query('PRC_Get_MachineOperation_Data');
+    res.status(200).json({
+      msg: 'SuccessFully Get the MachineOperation Data',
+      data: data[0],
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: 'Server Error' });
   }
-  catch(error){
-   console.log(error);
-   res.status(500).json({ msg: 'Server Error' });
-  }
-}
+};
 
 module.exports = {
   department,
@@ -140,5 +139,5 @@ module.exports = {
   machineName,
   getComponentData,
   getOperationData,
-  getMachineOperationData 
+  getMachineOperationData,
 };
