@@ -1,10 +1,18 @@
-const moment = require('moment');
 const { poolPromise, db } = require('../models/index');
 const sql = require('mssql');
 
 const addmachineOperation = async (req, res) => {
-  const { componentName, operationName, machineName, programId, quantityPerCycle, perhourOutput, toct, cycleTime,
-    createBy } = req.body;
+  const {
+    componentName,
+    operationName,
+    machineName,
+    programId,
+    quantityPerCycle,
+    perhourOutput,
+    toct,
+    cycleTime,
+    createBy,
+  } = req.body;
 
   try {
     const pool = await poolPromise;
@@ -20,7 +28,7 @@ const addmachineOperation = async (req, res) => {
       .input('pIN_OutHours', sql.Int, perhourOutput)
       .input('pIN_CycleTime', sql.Int, cycleTime)
       .execute('PRC_Insert_MachineOperation');
-    const data = machineOperationData.recordset
+    const data = machineOperationData.recordset;
 
     return res
       .status(200)
@@ -32,8 +40,8 @@ const addmachineOperation = async (req, res) => {
 };
 
 const updateMachineOperation = async (req, res) => {
-
-  const { Id, ProgramId, QuantityPerCycle, Toct, PerhourOutput, CycleTime } = req.body;
+  const { Id, ProgramId, QuantityPerCycle, Toct, PerhourOutput, CycleTime } =
+    req.body;
 
   try {
     const pool = await poolPromise;
@@ -46,7 +54,7 @@ const updateMachineOperation = async (req, res) => {
       .input('pIN_OutputPerhour', sql.Int, PerhourOutput)
       .input('pIN_CycleTime', sql.Int, CycleTime)
       .execute('PRC_Update_MachineOperation');
-    const data = MachineOperationupdateData.recordset[0]
+    const data = MachineOperationupdateData.recordset[0];
 
     return res
       .status(200)
@@ -55,11 +63,9 @@ const updateMachineOperation = async (req, res) => {
     console.log(error);
     res.status(500).json({ msg: 'Server Error' });
   }
-}
-
-
+};
 
 module.exports = {
   addmachineOperation,
   updateMachineOperation,
-}
+};
