@@ -1,11 +1,13 @@
-const moment = require('moment');
 const { poolPromise, db } = require('../models/index');
 const sql = require('mssql');
 
 const addmachineOperation = async (req, res) => {
   const {
     componentName,
+
     operationNumber,
+
+    operationName,
     machineName,
     programId,
     quantityPerCycle,
@@ -16,13 +18,13 @@ const addmachineOperation = async (req, res) => {
   } = req.body;
 
   console.log(req.body);
-
   try {
     const pool = await poolPromise;
     const machineOperationData = await pool
       .request()
       .input('pIN_ComponentNumber', sql.Int, componentName)
       .input('pIN_OperationNumber', sql.Int, Number(operationNumber))
+      .input('pIN_OperationNumber', sql.Int, operationName)
       .input('pIN_MachineId', sql.Int, machineName)
       .input('pIN_ProgramId', sql.VarChar, programId)
       .input('pIN_QuantityPerCycle', sql.Int, quantityPerCycle)

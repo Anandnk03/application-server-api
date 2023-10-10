@@ -15,7 +15,7 @@ const gapReason = async (req, res) => {
         HOURENDTIME: moment(da.HOURENDTIME).format('HH:mm:ss'),
       });
     });
-    res.status(200).json({ msg: 'Gap Reason Found..!', data: gapData });
+    res.status(200).json({ msg: 'Gap Reason Found..!', data: gap[0] });
   } catch (error) {
     console.log(error);
     res.status(200).json({ msg: 'Server Error' });
@@ -46,7 +46,7 @@ const createReason = async (req, res) => {
 
 const createMaster = async (req, res) => {
   const { newReason, MachineId, typeID } = req.body;
-  
+
 
   try {
     const pool = await poolPromise;
