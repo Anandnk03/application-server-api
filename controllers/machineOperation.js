@@ -4,9 +4,7 @@ const sql = require('mssql');
 const addmachineOperation = async (req, res) => {
   const {
     componentName,
-
     operationNumber,
-
     operationName,
     machineName,
     programId,
@@ -17,7 +15,6 @@ const addmachineOperation = async (req, res) => {
     createBy,
   } = req.body;
 
-  console.log(req.body);
   try {
     const pool = await poolPromise;
     const machineOperationData = await pool
