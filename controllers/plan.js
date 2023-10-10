@@ -1,6 +1,7 @@
 const moment = require('moment');
 const { poolPromise, db } = require('../models/index');
 const sql = require('mssql');
+const { body } = require('express-validator');
 
 const createPlan = async (req, res) => {
   const {
@@ -14,8 +15,6 @@ const createPlan = async (req, res) => {
     status,
     Days,
   } = req.body;
-
-  
 
   if (password != 1000 && password != 2000 && password != 3000) {
     return res.status(404).json({ msg: 'Password Incorrect!' });
